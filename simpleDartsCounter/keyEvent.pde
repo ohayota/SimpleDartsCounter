@@ -11,15 +11,15 @@ void keyPressed() {
       case '7':
       case '8':
       case '9':
-        game501.addNum(String.valueOf(key));
+        game501.addInput(String.valueOf(key));
         break;
       case BACKSPACE:
-        game501.deleteNum();
+        game501.deleteInput();
         break;
       case ENTER:
-        boolean isUpdated = game501.updateScore(); //<>//
-        if (isUpdated) { //<>//
-          game501.resetNum();
+        boolean isUpdated = game501.updateScore(); //<>// //<>//
+        if (isUpdated) { //<>// //<>//
+          game501.resetInput();
           if (game501.isPlaying) game501.changePlayer();
         }
         break;

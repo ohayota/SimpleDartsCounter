@@ -18,13 +18,13 @@ void keyTyped() {
           case BACKSPACE:
             game301.deleteInput();
             break;
-          case ENTER: //<>//
+          case ENTER: //<>// //<>//
             if (game301.isScoreUpdated()) {
               game301.resetInput();
               if (game301.isFinish()) {
                 game301.terminateGame();
               } else {
-                game301.changePlayer(); //<>//
+                game301.changePlayer(); //<>// //<>//
               }
             }
             break;

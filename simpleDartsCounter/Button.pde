@@ -22,13 +22,6 @@ class Button {
   }
   
   void toNext() {
-    // プレイヤー数選択のときだけ，選択されたゲームモードを記録しておく
-    switch (next) {
-      case SelectGame:
-        selectPlayer = new SelectPlayer(next);
-      default:
-        break;
-    }
     mode = next;
   }
   

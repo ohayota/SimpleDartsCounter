@@ -21,28 +21,37 @@ class Button {
     return pow(mouseX-x, 2) + pow(mouseY-y, 2) < pow(size/2, 2);
   }
   
-  void next() {
+  void toNext() {
+    // プレイヤー数選択のときだけ，選択されたゲームモードを記録しておく
+    switch (next) {
+      case SelectGame:
+        selectPlayer = new SelectPlayer(next);
+      default:
+        break;
+    }
     mode = next;
   }
   
   void draw() {
     fill(fillColor);
-    // マウスカーソルが乗ると暗く小さくなり，離れると戻る
+    // マウスカーソルが乗ると明るく大きくなり，離れると戻る
     // 押すと少し小さくなる（沈む）
     if (mousePressed) {
       if (judgeMouse()) {
         ellipse(x, y, nowSize*0.9, nowSize*0.9);
         fill(0, 100);
         ellipse(x, y, nowSize*0.9, nowSize*0.9);
+      } else {
+        fill(fillColor);
+        ellipse(x, y, nowSize, nowSize);
       }
     } else {
       if (judgeMouse()) {
-        if (size-20 < nowSize) nowSize -= 4;
-        ellipse(x, y, nowSize, nowSize);
-        fill(0, 50);
+        if (nowSize < size+20) nowSize += 4;
+        fill(255);
         ellipse(x, y, nowSize, nowSize);
       } else {
-        if (nowSize < size) nowSize += 4;
+        if (size < nowSize) nowSize -= 4;
         ellipse(x, y, nowSize, nowSize);
       }
     }

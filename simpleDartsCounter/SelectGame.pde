@@ -5,7 +5,8 @@ class SelectGame extends SelectClass {
   SelectGame() {
     super();
     buttons = new ArrayList<Button>();
-    buttons.add(new Button(450, 400, 150, 501, color(150, 0, 0), color(255), Mode.SelectPlayer));
+    buttons.add(new Button(350, 400, 150, 301, color(150), color(0), Mode.SelectPlayer));
+    buttons.add(new Button(550, 400, 150, 501, color(150), color(0), Mode.SelectPlayer));
   }
   
   void draw() {

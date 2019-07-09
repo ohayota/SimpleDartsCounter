@@ -1,31 +1,71 @@
-void keyPressed() {
-  if (mode == Mode.Game501 && game501.isPlaying) {
-    switch (key) {
-      case '0':
-      case '1':
-      case '2':
-      case '3':
-      case '4':
-      case '5':
-      case '6':
-      case '7':
-      case '8':
-      case '9':
-        game501.addInput(String.valueOf(key));
-        break;
-      case BACKSPACE:
-        game501.deleteInput();
-        break;
-      case ENTER:
-        boolean isUpdated = game501.updateScore(); //<>// //<>//
-        if (isUpdated) { //<>// //<>//
-          game501.resetInput();
-          if (game501.isPlaying) game501.changePlayer();
+void keyTyped() {
+  switch (mode) {
+    case Game301:
+      if (mode == Mode.Game301 && game301.isPlaying) {
+        switch (key) {
+          case '0':
+          case '1':
+          case '2':
+          case '3':
+          case '4':
+          case '5':
+          case '6':
+          case '7':
+          case '8':
+          case '9':
+            game301.addInput(String.valueOf(key));
+            break;
+          case BACKSPACE:
+            game301.deleteInput();
+            break;
+          case ENTER: //<>//
+            if (game301.isScoreUpdated()) {
+              game301.resetInput();
+              if (game301.isFinish()) {
+                game301.terminateGame();
+              } else {
+                game301.changePlayer(); //<>//
+              }
+            }
+            break;
+          default:
+            break;
         }
-        break;
-      default:
-        break;
-    }
+      }
+    case Game501:
+      if (mode == Mode.Game501 && game501.isPlaying) {
+        switch (key) {
+          case '0':
+          case '1':
+          case '2':
+          case '3':
+          case '4':
+          case '5':
+          case '6':
+          case '7':
+          case '8':
+          case '9':
+            game501.addInput(String.valueOf(key));
+            break;
+          case BACKSPACE:
+            game501.deleteInput();
+            break;
+          case ENTER:
+            if (game501.isScoreUpdated()) {
+              game501.resetInput();
+              if (game501.isFinish()) {
+                game501.terminateGame();
+              } else {
+                game501.changePlayer();
+              }
+            }
+            break;
+          default:
+            break;
+        }
+      }
+    default:
+      break;
   }
 }
 

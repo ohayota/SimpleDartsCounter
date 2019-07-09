@@ -58,12 +58,12 @@ class Editor {
     ArrayList<Integer> nums = new ArrayList<Integer>();
     // スコア入力は1桁ごとのStringだったのでint型にする
     for (int i = 0; i <= 2; i++) {
-      if (inputScore[i].isEmpty()) break; //<>// //<>//
-      nums.add(parseInt(inputScore[i])); //<>// //<>//
-    } //<>// //<>//
+      if (inputScore[i].isEmpty()) break; //<>//
+      nums.add(parseInt(inputScore[i])); //<>//
+    } //<>//
     // 一つの数字にする
-    int roundScore; //<>// //<>//
-    switch (nums.size()) { //<>// //<>//
+    int roundScore; //<>//
+    switch (nums.size()) { //<>//
       case 1:
         roundScore = nums.get(0);
         break;

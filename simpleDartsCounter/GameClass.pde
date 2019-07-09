@@ -4,20 +4,22 @@ abstract class GameClass {
   float topBarHeight;  // ゲーム名表示するトップバーの高さ
   String gameName;  // トップバーに表示するゲーム名
   
+  int[] playerScores;  // 全プレイヤーの点数
   String[] inputScore;  // 入力された点数（各桁ずつ）
   int nowIndex;  // 入力欄の何桁目に入力するかを示すindex
+  
   int nowPlayer;  // 点数入力ができるプレイヤーの番号
   int allPlayer;  // 全プレイヤーの人数
   int winner;  // ゲームに勝ったプレイヤーの番号
+  
   boolean isPlaying;  // ゲーム中か
-  boolean isUpdated;  // 画面を更新したか
+  boolean isUpdated;  // スコア更新したか
   boolean isError;  // エラーが起きているか
-  ArrayList<Integer> playerScores;  // 全プレイヤーの点数
   
   GameClass(int allPlayer, int score, float topBarHeight, String gameName) {
     this.allPlayer = allPlayer;
-    playerScores = new ArrayList<Integer>();
-    for (int i = 0; i < allPlayer; i++) playerScores.add(score);
+    playerScores = new int[allPlayer];
+    for (int i = 0; i < playerScores.length; i++) playerScores[i] = score;
     this.topBarHeight = topBarHeight;
     this.gameName = gameName;
     
@@ -39,7 +41,6 @@ abstract class GameClass {
   
   // 入力中，数字キーが押されたときに数字(String型)を追加する処理
   void addInput(String inputStr) {
-    if (isUpdated) return;
     // エラー直後の修正では入力内容とエラーをリセット
     if (isError) resetInput();
     // 最大でも180点だから，4桁目は入力させない
@@ -53,8 +54,6 @@ abstract class GameClass {
   
   // 入力中，BACKSPACEで1文字だけ消すときの処理
   void deleteInput() {
-    if (isUpdated) return;
-    
     if (0 < nowIndex) {
       inputScore[nowIndex-1] = "";
       nowIndex--;
@@ -68,7 +67,7 @@ abstract class GameClass {
     isError = false;
   }
   
-  // 各桁Stringで格納されているのを一つの整数値に変換(例: ["1","8","0"] -> 180)
+  // 各桁Stringで格納されているのを一つの整数値に変換(例: {"1","8","0"} -> 180)
   int convertToIntScore(String[] inputScore) {
     // 各桁intにしてArrayListに格納
     ArrayList<Integer> nums = new ArrayList<Integer>();
@@ -87,38 +86,25 @@ abstract class GameClass {
   }
   
   // ENTERが押されたとき，入力されたスコアを使って更新
-  boolean updateScore() {
+  void judgeScoreError() {
     // スコア未入力の時
-    setError(inputScore[0].isEmpty());
-    if (isError) return false;
-    
-    // 入力したスコア(String[])を整数(int)に変換
-    int roundScore = convertToIntScore(inputScore);
-    // 181点以上ならエラー
-    setError(181 <= roundScore);
-    if (isError) return false;
-    
-    // Bustしないときだけ点数更新
-    if (!isBust(roundScore)) playerScores.set(nowPlayer, playerScores.get(nowPlayer) - roundScore);
-    if (isFinish()) terminateGame();
-    return true;
+    setError(inputScore[0].isEmpty() || 181 <= convertToIntScore(inputScore));
   }
   
-  // Bustする点数か(01のみ)
+  // 各ゲームでオーバーライドする
+  abstract boolean isScoreUpdated();
+  
+  // Bustする点数か(01のみ呼び出せるようにする必要がある)
   boolean isBust(int roundScore) {
-    int newScore = playerScores.get(nowPlayer) - roundScore;
+    int newScore = playerScores[nowPlayer] - roundScore;
     return newScore < 0;
   }
   
   // ゲームの終了条件を満たしているか
-  boolean isFinish() {
-    return playerScores.get(nowPlayer) == 0;
-  }
+  abstract boolean isFinish();
   
   // ゲーム勝者の番号
-  int judgeWinner() {
-    return nowPlayer;
-  }
+  abstract int judgeWinner();
   
   // ゲーム終了時に呼ぶ
   void terminateGame() {
@@ -190,7 +176,7 @@ abstract class GameClass {
     drawRoundScore();
     // 各プレイヤーの持ち点表示
     fill(255);
-    for (int i = 0; i < allPlayer; i++) text(playerScores.get(i), width*(i*2+1)/(allPlayer*2), 300);
+    for (int i = 0; i < allPlayer; i++) text(playerScores[i], width*(i*2+1)/(allPlayer*2), 300);
   }
   
 }

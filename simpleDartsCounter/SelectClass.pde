@@ -1,5 +1,5 @@
 // 選択画面を作成するときは，このクラスを継承する
-abstract class SelectClass {
+class SelectClass {
   
   SelectClass() {
   }

@@ -1,14 +1,17 @@
 class SelectPlayer extends SelectClass {
   
   ArrayList<Button> buttons;
+  Mode next;
   
-  SelectPlayer() {
+  SelectPlayer(Mode next) {
     super();
+    this.next = next;
     buttons = new ArrayList<Button>();
-    buttons.add(new Button(150, 400, 150, 1, color(150, 0, 0), color(255), Mode.Game501));
-    buttons.add(new Button(350, 400, 150, 2, color(150, 0, 0), color(255), Mode.Game501));
-    buttons.add(new Button(550, 400, 150, 3, color(150, 0, 0), color(255), Mode.Game501));
-    buttons.add(new Button(750, 400, 150, 4, color(150, 0, 0), color(255), Mode.Game501));
+    color buttonColor = color(150);
+    buttons.add(new Button(150, 400, 150, 1, buttonColor, color(0), next));
+    buttons.add(new Button(350, 400, 150, 2, buttonColor, color(0), next));
+    buttons.add(new Button(550, 400, 150, 3, buttonColor, color(0), next));
+    buttons.add(new Button(750, 400, 150, 4, buttonColor, color(0), next));
   }
   
   void draw() {

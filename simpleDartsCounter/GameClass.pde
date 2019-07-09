@@ -127,7 +127,7 @@ abstract class GameClass {
   }
   
   // 点数入力部分の描画
-  void drawRoundScore() {
+  void drawInputScore() {
     String score = "";
     for (String s: inputScore) {
       if (s.isEmpty()) break;
@@ -142,10 +142,10 @@ abstract class GameClass {
       } else {
         // 終了時は勝者にWinner表示，ゲーム中は通常表示
         if (!isPlaying) {
-          fill(255, 255, 0);
+          fill(50);
           text("Winner", width*(winner*2+1)/(allPlayer*2), 450);
         } else {
-          fill(100);
+          fill(150);
           text("Score", width*(nowPlayer*2+1)/(allPlayer*2), 450);
         }
       }
@@ -153,30 +153,49 @@ abstract class GameClass {
       if (isError) {
         fill(255, 0, 0);
       } else {
-        fill(255);
+        fill(150);
       }
       text(score, width*(nowPlayer*2+1)/(allPlayer*2), 450);
     }
   }
   
-  void draw() {
-    fill(100, 0, 0);
+  // 各プレイヤーの持ち点表示
+  void drawPlayerScore() {
+    for (int i = 0; i < allPlayer; i++) {
+      if (i == nowPlayer) {
+        fill(0);
+      } else {
+        fill(255);
+      }
+      text(playerScores[i], width*(i*2+1)/(allPlayer*2), 300);
+    }
+  }
+  
+  void drawPlayerBack() {
+    // 現在のプレイヤーの背景のみ白で，入力したスコアを下部に表示
+    // ゲーム終了時の勝者は緑
+    if (isPlaying) {
+      fill(255);
+      rect(nowPlayer*(width/allPlayer), topBarHeight, width/allPlayer, height-topBarHeight);
+    } else {
+      fill(150, 255, 0);
+      rect(winner*(width/allPlayer), topBarHeight, width/allPlayer, height-topBarHeight);
+    }
+  }
+  
+  void drawTopBar() {
+    // トップバーの描画
+    fill(50);
     rect(0, 0, width, topBarHeight);
     fill(255);
     text(gameName, width/2, topBarHeight/2);
-    
-    // 現在のプレイヤーの背景のみ緑で，入力したスコアを下部に表示
-    // ゲーム終了時の勝者は赤
-    if (isPlaying) {
-      fill(0, 50, 0);
-    } else {
-      fill(100, 0, 0);
-    }
-    rect(winner*(width/allPlayer), topBarHeight, width/allPlayer, height-topBarHeight);
-    drawRoundScore();
-    // 各プレイヤーの持ち点表示
-    fill(255);
-    for (int i = 0; i < allPlayer; i++) text(playerScores[i], width*(i*2+1)/(allPlayer*2), 300);
+  }
+  
+  void draw() {
+    drawTopBar();
+    drawPlayerBack();
+    drawPlayerScore();
+    drawInputScore();
   }
   
 }

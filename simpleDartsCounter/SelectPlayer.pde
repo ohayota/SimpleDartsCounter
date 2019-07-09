@@ -7,11 +7,12 @@ class SelectPlayer extends SelectClass {
     super();
     this.next = next;
     buttons = new ArrayList<Button>();
-    color buttonColor = color(150);
-    buttons.add(new Button(150, 400, 150, 1, buttonColor, color(0), next));
-    buttons.add(new Button(350, 400, 150, 2, buttonColor, color(0), next));
-    buttons.add(new Button(550, 400, 150, 3, buttonColor, color(0), next));
-    buttons.add(new Button(750, 400, 150, 4, buttonColor, color(0), next));
+    color fillColor = color(150);
+    color textColor = color(0);
+    buttons.add(new Button(150, 400, 150, 1, fillColor, textColor, next));
+    buttons.add(new Button(350, 400, 150, 2, fillColor, textColor, next));
+    buttons.add(new Button(550, 400, 150, 3, fillColor, textColor, next));
+    buttons.add(new Button(750, 400, 150, 4, fillColor, textColor, next));
   }
   
   void draw() {

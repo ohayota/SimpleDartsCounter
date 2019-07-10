@@ -1,7 +1,7 @@
 void keyTyped() {
   switch (mode) {
     case Game301:
-      if (mode == Mode.Game301 && game301.isPlaying) {
+      if (game301.isPlaying) {
         switch (key) {
           case '0':
           case '1':
@@ -18,22 +18,20 @@ void keyTyped() {
           case BACKSPACE:
             game301.deleteInput();
             break;
-          case ENTER: //<>// //<>//
+          case ENTER:
             if (game301.isScoreUpdated()) {
               game301.resetInput();
-              if (game301.isFinish()) {
-                game301.terminateGame();
-              } else {
-                game301.changePlayer(); //<>// //<>//
-              }
+              game301.changePlayer();
             }
-            break;
+            break; //<>//
           default:
             break;
         }
+      } else {
+        if (key == ENTER) game301 = new Game301(game301.allPlayer);
       }
     case Game501:
-      if (mode == Mode.Game501 && game501.isPlaying) {
+      if (game501.isPlaying) {
         switch (key) {
           case '0':
           case '1':
@@ -63,6 +61,8 @@ void keyTyped() {
           default:
             break;
         }
+      } else {
+        if (key == ENTER) game501 = new Game501(game501.allPlayer);
       }
     default:
       break;

@@ -49,7 +49,7 @@ void draw() {
   if (DEBUG_MODE) {
     println("<<Debug Mode>> draw");
     
-    testGame501();
+    testGame01();
     
     println("All tests passed!");
     exit();

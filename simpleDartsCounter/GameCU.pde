@@ -3,12 +3,12 @@ class GameCU extends GameClass {
   ArrayList<Button> buttons;
   
   GameCU(int player) {
-    super(player, 0, 50, "COUNT-UP");
+    super(player, 8, 0, 50, "COUNT-UP");
     buttons = new ArrayList<Button>();
   }
   
   boolean isFinish() {
-    return playerScores[nowPlayer] == 800;  // 本来は最終プレイヤーの8ラウンドが終了した時点
+    return playerScores[nowPlayer] == 800 || nowRound == allRound;  // 本来は最終プレイヤーの8ラウンドが終了した時点
   }
   
   int judgeWinner() {

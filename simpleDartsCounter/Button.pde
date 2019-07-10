@@ -50,7 +50,25 @@ class Button {
     }
     // ボタン名をボタンの中心に表示
     fill(textColor);
-    text(number, x, y);
+    if (mode == Mode.SelectGame) {
+      String gameName = "";
+      switch (next) {
+        case GameCU:
+          gameName = "CU";
+          break;
+        case Game301:
+          gameName = "301";
+          break;
+        case Game501:
+          gameName = "501";
+          break;
+        default:
+          break;
+      }
+      text(gameName, x, y);
+    } else {
+      text(number, x, y);
+    }
   }
   
 }

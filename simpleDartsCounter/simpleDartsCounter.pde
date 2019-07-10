@@ -12,7 +12,7 @@ Game301 game301;
 Game501 game501;
 Editor editor;
 
-boolean DEBUG_MODE = false;
+boolean DEBUG_MODE = true;
 
 enum Mode {
   SelectGame,
@@ -49,7 +49,7 @@ void draw() {
   if (DEBUG_MODE) {
     println("<<Debug Mode>> draw");
     
-    testGame501();
+    testGame01();
     
     println("All tests passed!");
     exit();

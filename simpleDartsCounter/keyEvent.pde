@@ -23,13 +23,14 @@ void keyTyped() {
               game301.resetInput();
               game301.changePlayer();
             }
-            break; //<>//
+            break; //<>// //<>//
           default:
             break;
         }
       } else {
         if (key == ENTER) game301 = new Game301(game301.allPlayer);
       }
+      break;
     case Game501:
       if (game501.isPlaying) {
         switch (key) {
@@ -64,6 +65,7 @@ void keyTyped() {
       } else {
         if (key == ENTER) game501 = new Game501(game501.allPlayer);
       }
+      break;
     default:
       break;
   }

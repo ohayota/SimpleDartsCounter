@@ -50,6 +50,7 @@ void draw() {
     println("<<Debug Mode>> draw");
     
     testGame01();
+    testGameCU();
     
     println("All tests passed!");
     exit();

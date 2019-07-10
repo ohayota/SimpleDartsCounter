@@ -1,5 +1,36 @@
 void keyTyped() {
   switch (mode) {
+    case GameCU:
+      if (gameCU.isPlaying) {
+        switch (key) {
+          case '0':
+          case '1':
+          case '2':
+          case '3':
+          case '4':
+          case '5':
+          case '6':
+          case '7':
+          case '8':
+          case '9':
+            gameCU.addInput(String.valueOf(key));
+            break;
+          case BACKSPACE:
+            gameCU.deleteInput();
+            break;
+          case ENTER:
+            if (gameCU.isScoreUpdated()) {
+              gameCU.resetInput();
+              gameCU.changePlayer();
+            }
+            break; //<>//
+          default:
+            break;
+        }
+      } else {
+        if (key == ENTER) gameCU = new GameCU(gameCU.allPlayer);
+      }
+      break;
     case Game301:
       if (game301.isPlaying) {
         switch (key) {
@@ -23,7 +54,7 @@ void keyTyped() {
               game301.resetInput();
               game301.changePlayer();
             }
-            break; //<>// //<>//
+            break;
           default:
             break;
         }

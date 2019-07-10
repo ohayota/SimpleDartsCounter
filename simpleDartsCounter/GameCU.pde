@@ -8,17 +8,22 @@ class GameCU extends GameClass {
   }
   
   boolean isFinish() {
-    return playerScores[nowPlayer] == 800 || nowRound == allRound;  // 本来は最終プレイヤーの8ラウンドが終了した時点
+    return nowRound == allRound && nowPlayer+1 == allPlayer;
   }
   
   int judgeWinner() {
-    return max(playerScores);
+    int win = 0;
+    for (int i = 1; i < playerScores.length; i++) {
+      if (playerScores[winner] < playerScores[i]) win = i;
+    }
+    return win;
   }
   
   boolean isScoreUpdated() {
     setError(inputScore[0].isEmpty() || 181 <= convertToIntScore(inputScore));
     if (isError) return false;
-    playerScores[nowPlayer] += convertToIntScore(inputScore);
+    int roundScore = convertToIntScore(inputScore);
+    playerScores[nowPlayer] += roundScore;
     return true;
   }
   

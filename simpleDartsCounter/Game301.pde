@@ -3,16 +3,20 @@ class Game301 extends GameClass {
   ArrayList<Button> buttons;
   
   Game301(int player) {
-    super(player, 301, 50, "301");
+    super(player, 10, 301, 50, "301");
     buttons = new ArrayList<Button>();
   }
   
   boolean isFinish() {
-    return playerScores[nowPlayer] == 0;
+    return playerScores[nowPlayer] == 0 || nowRound == allRound;
   }
   
   int judgeWinner() {
-    return min(playerScores);
+    int win = 0;
+    for (int i = 1; i < playerScores.length; i++) {
+      if (playerScores[i] < playerScores[winner]) win = i;
+    }
+    return win;
   }
   
   boolean isScoreUpdated() {

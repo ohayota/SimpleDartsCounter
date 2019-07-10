@@ -12,7 +12,7 @@ Game301 game301;
 Game501 game501;
 Editor editor;
 
-boolean DEBUG_MODE = true;
+boolean DEBUG_MODE = false;
 
 enum Mode {
   SelectGame,

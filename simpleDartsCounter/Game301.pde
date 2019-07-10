@@ -8,7 +8,7 @@ class Game301 extends GameClass {
   }
   
   boolean isFinish() {
-    return playerScores[nowPlayer] == 0 || nowRound == allRound;
+    return playerScores[nowPlayer] == 0 || (nowRound == allRound && nowPlayer+1 == allPlayer);
   }
   
   int judgeWinner() {

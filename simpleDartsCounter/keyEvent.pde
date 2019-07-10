@@ -61,6 +61,7 @@ void keyTyped() {
       } else {
         if (key == ENTER) game301 = new Game301(game301.allPlayer);
       }
+      break;
     case Game501:
       if (game501.isPlaying) {
         switch (key) {

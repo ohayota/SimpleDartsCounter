@@ -1,4 +1,4 @@
-// SimpleDartsCounter (ver1.0)
+// SimpleDartsCounter (ver1.2)
 // © 2019 Yota Nakamura
 
 import java.util.Arrays;

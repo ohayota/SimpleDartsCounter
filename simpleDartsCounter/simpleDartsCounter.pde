@@ -1,4 +1,4 @@
-// SimpleDartsCounter (ver1.1)
+// SimpleDartsCounter (ver1.2)
 // © 2019 Yota Nakamura
 
 import java.util.Arrays;
@@ -49,7 +49,8 @@ void draw() {
   if (DEBUG_MODE) {
     println("<<Debug Mode>> draw");
     
-    testGame501();
+    testGame01();
+    testGameCU();
     
     println("All tests passed!");
     exit();

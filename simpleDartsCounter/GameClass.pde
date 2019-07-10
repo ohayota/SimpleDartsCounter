@@ -12,12 +12,16 @@ abstract class GameClass {
   int allPlayer;  // 全プレイヤーの人数
   int winner;  // ゲームに勝ったプレイヤーの番号
   
+  int allRound;
+  int nowRound;
+  
   boolean isPlaying;  // ゲーム中か
   boolean isUpdated;  // スコア更新したか
   boolean isError;  // エラーが起きているか
   
-  GameClass(int allPlayer, int score, float topBarHeight, String gameName) {
+  GameClass(int allPlayer, int allRound, int score, float topBarHeight, String gameName) {
     this.allPlayer = allPlayer;
+    this.allRound = allRound;
     playerScores = new int[allPlayer];
     for (int i = 0; i < playerScores.length; i++) playerScores[i] = score;
     this.topBarHeight = topBarHeight;
@@ -27,6 +31,7 @@ abstract class GameClass {
     nowIndex = 0;
     nowPlayer = 0;
     winner = 0;
+    nowRound = 1;
     isPlaying = true;
     isUpdated = false;
   }
@@ -91,14 +96,14 @@ abstract class GameClass {
     setError(inputScore[0].isEmpty() || 181 <= convertToIntScore(inputScore));
   }
   
-  // 各ゲームでオーバーライドする
-  abstract boolean isScoreUpdated();
-  
   // Bustする点数か(01のみ呼び出せるようにする必要がある)
   boolean isBust(int roundScore) {
     int newScore = playerScores[nowPlayer] - roundScore;
     return newScore < 0;
   }
+  
+  // スコアの更新をし，更新できたか返す
+  abstract boolean isScoreUpdated();
   
   // ゲームの終了条件を満たしているか
   abstract boolean isFinish();
@@ -112,15 +117,24 @@ abstract class GameClass {
     isPlaying = false;
   }
   
-  // エラー判定
+  // エラー判定とエラー状態の更新
   void setError(boolean isError) {
     this.isError = isError;
   }
   
+  void incrementRound() {
+    nowRound++;
+  }
+  
   // プレイヤー交代時に呼ぶ
   void changePlayer() {
+    if (isFinish()) {
+      terminateGame();
+      return;
+    }
     if (nowPlayer == allPlayer-1) {
       nowPlayer = 0;
+      incrementRound();
     } else {
       nowPlayer++;
     }
@@ -140,13 +154,13 @@ abstract class GameClass {
         fill(255, 0, 0);
         text("Score", width*(nowPlayer*2+1)/(allPlayer*2), 450);
       } else {
-        // 終了時は勝者にWinner表示，ゲーム中は通常表示
-        if (!isPlaying) {
-          fill(50);
-          text("Winner", width*(winner*2+1)/(allPlayer*2), 450);
-        } else {
+        // ゲーム中は通常表示，終了時は勝者にWinner表示
+        if (isPlaying) {
           fill(150);
           text("Score", width*(nowPlayer*2+1)/(allPlayer*2), 450);
+        } else {
+          fill(50);
+          text("Winner", width*(winner*2+1)/(allPlayer*2), 450);
         }
       }
     } else {  // スコア入力中
@@ -162,10 +176,18 @@ abstract class GameClass {
   // 各プレイヤーの持ち点表示
   void drawPlayerScore() {
     for (int i = 0; i < allPlayer; i++) {
-      if (i == nowPlayer) {
-        fill(0);
+      if (isPlaying) {
+        if (i == nowPlayer) {
+          fill(0);
+        } else {
+          fill(255);
+        }
       } else {
-        fill(255);
+        if (i == winner) {
+          fill(0);
+        } else {
+          fill(255);
+        }
       }
       text(playerScores[i], width*(i*2+1)/(allPlayer*2), 300);
     }
@@ -189,6 +211,7 @@ abstract class GameClass {
     rect(0, 0, width, topBarHeight);
     fill(255);
     text(gameName, width/2, topBarHeight/2);
+    text("ROUND " + nowRound + "/" + allRound, 150, topBarHeight/2);
   }
   
   void draw() {

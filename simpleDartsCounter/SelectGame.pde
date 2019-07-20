@@ -15,7 +15,9 @@ class SelectGame extends SelectClass {
   void draw() {
     super.draw();
     fill(255);
+    textSize(60);
     text("SELECT GAME", width/2, 150);
+    textSize(45);
     for (Button b: buttons) b.draw();
   }
   

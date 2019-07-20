@@ -40,11 +40,11 @@ class Button {
       }
     } else {
       if (judgeMouse()) {
-        if (nowSize < size+20) nowSize += 4;
+        if (nowSize < size+10) nowSize += 2;
         fill(255);
         ellipse(x, y, nowSize, nowSize);
       } else {
-        if (size < nowSize) nowSize -= 4;
+        if (size < nowSize) nowSize -= 2;
         ellipse(x, y, nowSize, nowSize);
       }
     }

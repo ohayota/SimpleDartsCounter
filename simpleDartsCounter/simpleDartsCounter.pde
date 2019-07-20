@@ -14,6 +14,8 @@ Editor editor;
 
 boolean DEBUG_MODE = false;
 
+PFont helvetica;
+
 enum Mode {
   SelectGame,
   SelectPlayer,
@@ -38,6 +40,9 @@ void setup() {
   textSize(40);
   frameRate(60);
   noStroke();
+  
+  helvetica = createFont("Helvetica", 40);
+  textFont(helvetica);
   
   mode = Mode.SelectGame;
   selectGame = new SelectGame();

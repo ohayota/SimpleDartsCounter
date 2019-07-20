@@ -30,6 +30,7 @@ class Game501 extends GameClass {
   
   void draw() {
     super.draw();
+    textSize(40);
     for (Button b: buttons) b.draw();
   }
   

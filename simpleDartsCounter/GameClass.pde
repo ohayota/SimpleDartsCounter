@@ -142,6 +142,7 @@ abstract class GameClass {
   
   // 点数入力部分の描画
   void drawInputScore() {
+    textSize(40);
     String score = "";
     for (String s: inputScore) {
       if (s.isEmpty()) break;
@@ -175,6 +176,7 @@ abstract class GameClass {
   
   // 各プレイヤーの持ち点表示
   void drawPlayerScore() {
+    textSize(80);
     for (int i = 0; i < allPlayer; i++) {
       if (isPlaying) {
         if (i == nowPlayer) {
@@ -210,7 +212,9 @@ abstract class GameClass {
     fill(50);
     rect(0, 0, width, topBarHeight);
     fill(255);
+    textSize(40);
     text(gameName, width/2, topBarHeight/2);
+    textSize(30);
     text("ROUND " + nowRound + "/" + allRound, 150, topBarHeight/2);
   }
   
